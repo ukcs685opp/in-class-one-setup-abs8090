@@ -17,7 +17,7 @@ public class EpidemicRouter extends ActiveRouter {
 	 * the given Settings object.
 	 * @param s The settings object
 	 */
-	public EpidemicRouter(Settings s) {
+	public EpidemicRouter(Settings s) {		
 		super(s);
 		//TODO: read&use epidemic router specific settings (if any)
 	}
@@ -28,6 +28,7 @@ public class EpidemicRouter extends ActiveRouter {
 	 */
 	protected EpidemicRouter(EpidemicRouter r) {
 		super(r);
+//		System.out.println("const");
 		//TODO: copy epidemic settings here (if any)
 	}
 
@@ -35,21 +36,25 @@ public class EpidemicRouter extends ActiveRouter {
 	public void update() {
 		super.update();
 		if (isTransferring() || !canStartTransfer()) {
+//			System.out.println("const 2");
 			return; // transferring, don't try other connections yet
+			
 		}
 
 		// Try first the messages that can be delivered to final recipient
 		if (exchangeDeliverableMessages() != null) {
+//			System.out.println("const 3");
 			return; // started a transfer, don't try others (yet)
 		}
 
 		// then try any/all message to any/all connection
-		this.tryAllMessagesToAllConnections();
+		this.tryAllMessagesToAllConnections(0.85);
 	}
 
 
 	@Override
 	public EpidemicRouter replicate() {
+//		System.out.println("const");
 		return new EpidemicRouter(this);
 	}
 

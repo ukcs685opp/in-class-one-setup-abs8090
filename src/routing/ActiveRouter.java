@@ -488,6 +488,24 @@ public abstract class ActiveRouter extends MessageRouter {
 
 		return tryMessagesToConnections(messages, connections);
 	}
+	protected Connection tryAllMessagesToAllConnections(double percent){
+		List<Connection> connections = getConnections();
+		if (connections.size() == 0 || this.getNrofMessages() == 0) {
+			return null;
+		}
+		List<Connection> temp_conn = new ArrayList<Connection>();
+		for(Connection c: connections){
+			if(Math.random() <= percent ){
+				temp_conn.add(c);
+			}
+		}
+		
+		List<Message> messages =
+			new ArrayList<Message>(this.getMessageCollection());
+		this.sortByQueueMode(messages);
+		
+		return tryMessagesToConnections(messages, temp_conn);
+	}
 
 	/**
 	 * Exchanges deliverable (to final recipient) messages between this host

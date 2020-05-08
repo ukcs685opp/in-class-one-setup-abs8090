@@ -21,6 +21,7 @@ import core.Settings;
 public class SprayAndWaitRouter extends ActiveRouter {
 	/** identifier for the initial number of copies setting ({@value})*/
 	public static final String NROF_COPIES = "nrofCopies";
+							//NROF_COPIES_S
 	/** identifier for the binary-mode setting ({@value})*/
 	public static final String BINARY_MODE = "binaryMode";
 	/** SprayAndWait router's settings name space ({@value})*/
